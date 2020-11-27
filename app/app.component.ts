@@ -10,7 +10,8 @@ export class AppComponent {
   imgUrl = "";
   url="";
   userName: string="";
-  
+  nameError: string="";
+
   ngOnInit(): void {
     this.title = "Hello from BridgeLabz";
     this.imgUrl = "../assets/BL_logo_square_jpg.jpg"
@@ -20,5 +21,18 @@ export class AppComponent {
   onClick($event){
     console.log("Save Button is clicked!:",$event);
     window.open(this.url,"_blank");
+  }
+
+  onInput($event){
+    console.log("Change Event Occured", $event.data);
+    const Regex=RegExp('^[A-Z]{1}[A-Za-z\\s]{2,}$');
+    if(Regex.test(this.userName)){
+      this.nameError="";
+      return;
+    }
+    else{
+      this.userName="";
+      this.nameError="Name is incorrect";
+    }
   }
 }
